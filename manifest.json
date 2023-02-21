@@ -4,7 +4,11 @@
 	"version": "0.1",
 	"content_scripts": [
 		{
-			"matches": ["https://blur.io/portfolio/bids","https://blur.io/collection/azuki/bids"],
+			"matches": [
+				"https://blur.io/portfolio/bids",
+				"https://blur.io/collection/mutant-ape-yacht-club/bids",
+				"https://blur.io/collection/azuki/bids"
+			],
 			"js": ["jquery-1.12.4.min.js","contentScript.js"]
 		}
 	],
