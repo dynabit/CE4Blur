@@ -9,6 +9,7 @@ function tryRun(){
 }
 var output={};
 var bids={};
+const filters={'MutantApeYachtClub':1,'Azuki':1};
 function tryRunBidPage(){
 	var list=$('div#portfolio-main').find('div>div>div>div.interactive>div>a');
 	if(list.length==0){setTimeout(tryRunBidPage,1000);return;}
@@ -16,12 +17,11 @@ function tryRunBidPage(){
 		var row=list[idx];
 		var name=$(row.childNodes[0]).find('div>div')[0].innerHTML;
 		var price=row.childNodes[1].childNodes[0].innerHTML;
-		output[name]=row.childNodes[2].childNodes[0];
-		bids[name]=price;
-		if(name=='Azuki'){
+		if(filters[name]!=undefined){
+			output[name]=row.childNodes[2].childNodes[0];
+			bids[name]=price;
 			var type='open';
 			chrome.runtime.sendMessage({type,name,price});
-			break;
 		}
 	}
 }
@@ -66,5 +66,6 @@ chrome.runtime.onMessage.addListener(
     if (request.type == "data"){
     	processData(request.name,request.data);
   	}
+  	sendResponse({msg: "ok"});
   }
 );
