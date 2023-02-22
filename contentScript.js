@@ -16,9 +16,9 @@ function tryRunBidPage(){
 	for(var idx=0;idx<list.length;idx++){
 		var row=list[idx];
 		var name=$(row.childNodes[0]).find('div>div')[0].innerHTML;
-		var price=row.childNodes[1].childNodes[0].innerHTML;
+		var price=row.childNodes[2].childNodes[0].innerHTML;
 		if(filters[name]!=undefined){
-			output[name]=row.childNodes[2].childNodes[0];
+			output[name]=row.childNodes[3].childNodes[0];
 			bids[name]=price;
 			var type='open';
 			chrome.runtime.sendMessage({type,name,price});
