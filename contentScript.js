@@ -41,7 +41,7 @@ function tryRunCollectionPage(){
 	console.log(data);
 	var type='data';
 	chrome.runtime.sendMessage({type,name,data});
-	setTimeout(tryRunCollectionPage,5000);
+	setTimeout(tryRunCollectionPage,1000);
 }
 
 function processData(name,data){
