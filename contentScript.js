@@ -10,6 +10,7 @@ function tryRun(){
 var output={};
 var bids={};
 const filters={'MutantApeYachtClub':1,'Azuki':1};
+var loops=0;
 function tryRunBidPage(){
 	var list=$('div#portfolio-main').find('div>div>div>div.interactive>div>a');
 	if(list.length==0){setTimeout(tryRunBidPage,1000);return;}
@@ -30,6 +31,7 @@ function tryRunCollectionPage(){
 	var list=$('div#collection-main').find('div.interactive').find('div.row');
 	if(list.length==0){setTimeout(tryRunCollectionPage,1000);return;}
 	var name=$('div#OVERLINE>div>div>div')[1].childNodes[0].innerHTML;
+	if(loops%75==1)$('div#OVERLINE>div>div>div')[1].childNodes[0].click();
 	var data = [];
 	for(var idx=0;idx<list.length;idx++){
 		var row=list[idx];
@@ -41,6 +43,7 @@ function tryRunCollectionPage(){
 	console.log(data);
 	var type='data';
 	chrome.runtime.sendMessage({type,name,data});
+	loops++;
 	setTimeout(tryRunCollectionPage,1000);
 }
 
